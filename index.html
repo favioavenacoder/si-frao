@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selector de Scripts</title>
+</head>
+<body>
+  <script>
+    var userInput = prompt("cifrar [1] o descifrar [2]:");
+
+    if (userInput === "1") {
+      // Llamar al primer script y luego al segundo
+      loadScript('script1.js', function() {
+        loadScript('script2.js');
+      });
+    } else if (userInput === "2") {
+      // Llamar al segundo script y luego al primero
+      loadScript('script4.js', function() {
+        loadScript('script3.js');
+      });
+    } else {
+      alert("Entrada no válida. Por favor, ingresa 1 o 2.");
+    }
+
+    function loadScript(scriptSrc, callback) {
+      var script = document.createElement('script');
+      script.src = scriptSrc;
+      script.onload = callback;
+      document.head.appendChild(script);
+    }
+  </script>
+</body>
+</html>
